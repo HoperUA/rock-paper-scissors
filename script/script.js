@@ -6,15 +6,24 @@ const options = ["paper", "rock", "scissors"];
 
 wannaPlay()
 
+function wannaPlay(){
+    let isRestart = confirm("Do you want to play?");
+    if (isRestart){
+        return playGame();
+    }else {
+        alert("Game is Aborted");
+        alert("Good Bye");
+    }
+}
+
 function getPlayersChoice(){
     let input = prompt('Choose Your Weapon (Type "Rock", "Paper", or "Scissors"');
     if (input === null){
         console.log("Game is Aborted");
-            return alert("Good Bye");
+        return alert("Good Bye");
     }else {
         return input;
-    }
-   
+    }  
 }
 
 function getComputerChoice() {
@@ -28,7 +37,6 @@ function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     console.log(playerSelection);
     console.log(computerSelection);
-   
 
         if ((playerSelection === "rock" && computerSelection === "scissors") || 
         (playerSelection === "paper" && computerSelection === "rock") ||
@@ -53,33 +61,15 @@ function playRound(playerSelection, computerSelection) {
             alert("Error, try again");
             return playRound();  
         }    
-    }
+}
 
-function game(){
-
-
+function playGame(){
     for (let i = 0; i < 5; i++) {
         playRound();
         alert(`Player: ${playerScore}; Computer: ${computerScore}`);
      }
-     alert(playerScore > computerScore ? "Congratulations, you won the game!" : "Sorry, you lost the game!")
+     alert(playerScore > computerScore ? "Congratulations, you won the game!" :
+      "Sorry, you lost the game!")
 }     
 
-function wannaPlay(){
-    let isRestart = confirm("Do you want to play?");
-    if (isRestart){
-        return game();
-    }else {
-        alert("Game is Aborted");
-        alert("Good Bye");
-    }
-    }
-
-
-
-
-
-
-//console.log(playerSelection.toLowerCase());
-//I need to make the Game function with the loop of 5 rounds
-
+wannaPlay()
