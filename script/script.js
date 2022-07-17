@@ -1,48 +1,79 @@
 let playerSelection;
 let computerSelection;
-const playerScore = 0;
-const computerScore = 0;
-
-
+let playerScore = 0;
+let computerScore = 0;
 const options = ["paper", "rock", "scissors"];
-function getComputerChoice() {
-    return options[Math.floor(Math.random() * options.length)];
+
+wannaPlay()
+
+function getPlayersChoice(){
+    let input = prompt('Choose Your Weapon (Type "Rock", "Paper", or "Scissors"');
+    if (input === null){
+        console.log("Game is Aborted");
+            return alert("Good Bye");
+    }else {
+        return input;
+    }
+   
 }
 
+function getComputerChoice() {
+    return options[Math.floor(Math.random() * options.length)];
+}   
 
-const playRound = function(playerSelection, computerSelection) {
-    playerSelection = prompt("Choose Your Weapon");
+function playRound(playerSelection, computerSelection) {
+
+    playerSelection = getPlayersChoice();
     computerSelection = getComputerChoice();
-    console.log(playerSelection.toLowerCase());
-    console.log(computerSelection);
     playerSelection = playerSelection.toLowerCase();
+    console.log(playerSelection);
+    console.log(computerSelection);
+   
 
         if ((playerSelection === "rock" && computerSelection === "scissors") || 
         (playerSelection === "paper" && computerSelection === "rock") ||
         (playerSelection === "scissors" && computerSelection === "paper")){
-            console.log(`You win, ${playerSelection} beats ${computerSelection}`);
-            return "win";
+            alert(`You win, ${playerSelection} beats ${computerSelection}`);
+            return playerScore += 1;
 
         }else if ((playerSelection === "scissors" && computerSelection === "paper") ||
         (playerSelection === "rock" && computerSelection === "paper") ||
         (playerSelection === "paper" && computerSelection === "scissors")){
-            console.log(`You lost, ${computerSelection} beats ${playerSelection}!`);
-            return "win";
+            alert(`You lost, ${computerSelection} beats ${playerSelection}!`);
+            return computerScore += 1;
 
         }else if (playerSelection == computerSelection){
-            console.log(`You both choose ${computerSelection}, it's a tie!`);
-            return "tie";
+           alert(`You both choose ${computerSelection}, it's a tie!`);
+            return playRound();
+
+        }else if (playerSelection === null){
+           return alert("Good Bye");
 
         }else {
-            console.log("Error, try again");
-            return playRound();
-        }   
-}
+            alert("Error, try again");
+            return playRound();  
+        }    
+    }
+
+function game(){
 
 
+    for (let i = 0; i < 5; i++) {
+        playRound();
+        alert(`Player: ${playerScore}; Computer: ${computerScore}`);
+     }
+     alert(playerScore > computerScore ? "Congratulations, you won the game!" : "Sorry, you lost the game!")
+}     
 
-
-
+function wannaPlay(){
+    let isRestart = confirm("Do you want to play?");
+    if (isRestart){
+        return game();
+    }else {
+        alert("Game is Aborted");
+        alert("Good Bye");
+    }
+    }
 
 
 
